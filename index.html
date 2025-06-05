@@ -72,9 +72,96 @@
   </style>
 </head>
 <body>
+  <style>
+  .bg-selector {
+    position: absolute;
+    top: 2rem;
+    right: 1rem;
+    z-index: 5;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+  }
+
+  .bg-trigger {
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    user-select: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .bg-carousel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0.5rem;
+    border-radius: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+  }
+
+  .bg-selector:hover .bg-carousel {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
+  }
+
+  .bg-selector:hover .bg-trigger {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .bg-thumb {
+    width: 80px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  }
+
+  .bg-thumb:hover {
+    transform: scale(1.05);
+  }
+</style>
+
+<div class="bg-selector">
+  <div class="bg-trigger">←</div>
+  <div class="bg-carousel">
+    <img src="media/cozy_orange.png" class="bg-thumb" data-bg="media/cozy_orange.png" />
+    <img src="media/cozy_purple.webp" class="bg-thumb" data-bg="media/cozy_purple.webp" />
+    <img src="media/cozy_rain.jpg" class="bg-thumb" data-bg="media/cozy_rain.jpg" />
+  </div>
+</div>
+
+<script>
+  // Aplicar fondo seleccionado y guardarlo
+  const thumbs = document.querySelectorAll('.bg-thumb');
+  thumbs.forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      const bgURL = thumb.dataset.bg;
+      document.body.style.backgroundImage = `url('${bgURL}')`;
+      localStorage.setItem('ghibli_bg', bgURL);
+    });
+  });
+
+  // Restaurar fondo guardado al cargar
+  const savedBG = localStorage.getItem('ghibli_bg');
+  if (savedBG) {
+    document.body.style.backgroundImage = `url('${savedBG}')`;
+  }
+</script>
   <div class="overlay"></div>
   <div class="container">
-    <h1>🎧 Lo-fi + Notas 📝</h1>
+    <h1>🎧 Lo-fi Notepad 📝</h1>
     <textarea id="notes" placeholder="Escribe aquí tus pensamientos..."></textarea>
     <audio controls autoplay loop>
       <source src="https://lofi.cafe/stream.mp3" type="audio/mpeg" />
