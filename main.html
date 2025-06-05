@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lo-fi Notas - Estilo Ghibli</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background-image: url('https://i.imgur.com/GfK4YpX.jpg'); /* Fondo estilo Ghibli */
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: white;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.5);
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 4px #000;
+    }
+
+    textarea {
+      width: 90%;
+      max-width: 700px;
+      height: 300px;
+      padding: 1rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      color: white;
+      font-size: 1rem;
+      resize: none;
+      backdrop-filter: blur(5px);
+    }
+
+    textarea::placeholder {
+      color: #ddd;
+    }
+
+    audio {
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      textarea {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="container">
+    <h1>🎧 Lo-fi + Notas 📝</h1>
+    <textarea id="notes" placeholder="Escribe aquí tus pensamientos..."></textarea>
+    <audio controls autoplay loop>
+      <source src="https://lofi.cafe/stream.mp3" type="audio/mpeg" />
+      Tu navegador no soporta audio.
+    </audio>
+  </div>
+
+  <script>
+    const notes = document.getElementById('notes');
+
+    // Cargar notas previas
+    notes.value = localStorage.getItem('ghibli_notes') || '';
+
+    // Guardar automáticamente al escribir
+    notes.addEventListener('input', () => {
+      localStorage.setItem('ghibli_notes', notes.value);
+    });
+  </script>
+</body>
+</html>
