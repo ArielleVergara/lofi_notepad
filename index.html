@@ -4,164 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lo-fi Notas - Estilo Ghibli</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
-
-    body {
-      margin: 0;
-      font-family: 'Quicksand', sans-serif;
-      background-image: url('media/1198594-3200x1680-desktop-hd-studio-ghibli-background.jpg'); /* Fondo estilo Ghibli */
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      color: white;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .overlay {
-      background-color: rgba(0, 0, 0, 0.5);
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1;
-    }
-
-    .container {
-      position: relative;
-      z-index: 2;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-
-    h1 {
-      margin-bottom: 1rem;
-      text-shadow: 1px 1px 4px #000;
-    }
-
-    textarea {
-      width: 90%;
-      max-width: 700px;
-      height: 300px;
-      padding: 1rem;
-      background-color: rgba(255, 255, 255, 0.1);
-      border: 1px solid #ccc;
-      border-radius: 12px;
-      color: white;
-      font-size: 1rem;
-      resize: none;
-      backdrop-filter: blur(5px);
-    }
-
-    textarea::placeholder {
-      color: #ddd;
-    }
-
-    audio {
-      margin-top: 2rem;
-    }
-
-    @media (max-width: 600px) {
-      textarea {
-        height: 200px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <style>
-  .bg-selector {
-    position: absolute;
-    top: 2rem;
-    right: 1rem;
-    z-index: 5;
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: flex-start;
-  }
-
-  .bg-trigger {
-    font-size: 1.5rem;
-    color: white;
-    cursor: pointer;
-    padding: 0.25rem 0.5rem;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 6px;
-    user-select: none;
-    transition: opacity 0.3s ease;
-  }
-
-  .bg-carousel {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 0.5rem;
-    border-radius: 10px;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(10px);
-    transition: all 0.3s ease;
-  }
-
-  .bg-selector:hover .bg-carousel {
-    opacity: 1;
-    pointer-events: all;
-    transform: translateX(0);
-  }
-
-  .bg-selector:hover .bg-trigger {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .bg-thumb {
-    width: 80px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: transform 0.2s;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  }
-
-  .bg-thumb:hover {
-    transform: scale(1.05);
-  }
-</style>
-
-<div class="bg-selector">
-  <div class="bg-trigger">←</div>
-  <div class="bg-carousel">
-    <img src="media/cozy_orange.png" class="bg-thumb" data-bg="media/cozy_orange.png" />
-    <img src="media/cozy_purple.webp" class="bg-thumb" data-bg="media/cozy_purple.webp" />
-    <img src="media/cozy_rain.jpg" class="bg-thumb" data-bg="media/cozy_rain.jpg" />
-  </div>
-</div>
-
-<script>
-  // Aplicar fondo seleccionado y guardarlo
-  const thumbs = document.querySelectorAll('.bg-thumb');
-  thumbs.forEach(thumb => {
-    thumb.addEventListener('click', () => {
-      const bgURL = thumb.dataset.bg;
-      document.body.style.backgroundImage = `url('${bgURL}')`;
-      localStorage.setItem('ghibli_bg', bgURL);
-    });
-  });
-
-  // Restaurar fondo guardado al cargar
-  const savedBG = localStorage.getItem('ghibli_bg');
-  if (savedBG) {
-    document.body.style.backgroundImage = `url('${savedBG}')`;
-  }
-</script>
   <div class="overlay"></div>
+
+  <!-- Selector de fondo -->
+  <div class="bg-selector">
+    <div class="bg-trigger">←</div>
+    <div class="bg-carousel">
+      <img src="media/cozy_ghibli.jpg" class="bg-thumb" data-bg="media/cozy_ghibli.jpg" />
+      <img src="media/cozy_orange.png" class="bg-thumb" data-bg="media/cozy_orange.png" />
+      <img src="media/cozy_purple.webp" class="bg-thumb" data-bg="media/cozy_purple.webp" />
+      <img src="media/cozy_rain.jpg" class="bg-thumb" data-bg="media/cozy_rain.jpg" />
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
   <div class="container">
-    <h1>🎧 Lo-fi Notepad 📝</h1>
+    <h1>🎧 Lo-fi + Notas 📝</h1>
     <textarea id="notes" placeholder="Escribe aquí tus pensamientos..."></textarea>
     <audio controls autoplay loop>
       <source src="https://lofi.cafe/stream.mp3" type="audio/mpeg" />
@@ -169,16 +30,6 @@
     </audio>
   </div>
 
-  <script>
-    const notes = document.getElementById('notes');
-
-    // Cargar notas previas
-    notes.value = localStorage.getItem('ghibli_notes') || '';
-
-    // Guardar automáticamente al escribir
-    notes.addEventListener('input', () => {
-      localStorage.setItem('ghibli_notes', notes.value);
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
