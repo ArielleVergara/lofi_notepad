@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lo-fi Notas - Estilo Ghibli</title>
+  <title>Lo-fi Notepad</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="overlay"></div>
 
-  <!-- Selector de fondo -->
+  <!-- background images -->
   <div class="bg-selector">
     <div class="bg-trigger">←</div>
     <div class="bg-carousel">
@@ -20,13 +20,29 @@
     </div>
   </div>
 
-  <!-- Contenido principal -->
+  <!-- Notepad -->
+   <h1>🎧 Lo-fi Notepad </h1>
   <div class="container">
-    <h1>🎧 Lo-fi + Notas 📝</h1>
-    <textarea id="notes" placeholder="Escribe aquí tus pensamientos..."></textarea>
+    <div class="toolbar">
+      <button onclick="formatText('bold')">🅑</button>
+      <button onclick="formatText('italic')">𝘐</button>
+      <button onclick="formatText('underline')">U̲</button>
+      <select onchange="changeFontSize(this.value)">
+        <option value="16px">16px</option>
+        <option value="20px">20px</option>
+        <option value="24px">24px</option>
+      </select>
+      <input type="color" onchange="changeTextColor(this.value)">
+    </div>
+    <div id="notes" contenteditable="true" class="editable" spellcheck="false">
+      You are the owner of your inner world...
+    </div>
+    <button id="download-notes">💾 Download</button>
+
+    <!-- Music -->
     <audio controls autoplay loop>
       <source src="https://lofi.cafe/stream.mp3" type="audio/mpeg" />
-      Tu navegador no soporta audio.
+      No audio available.
     </audio>
   </div>
 

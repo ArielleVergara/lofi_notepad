@@ -13,6 +13,17 @@ body {
   overflow: hidden;
 }
 
+.title {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+  margin: 0;
+  font-size: 1.5rem;
+  text-shadow: 1px 1px 4px #000;
+  color: white;
+}
+
 .overlay {
   background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
@@ -28,6 +39,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-top: 5rem;
   height: 100vh;
 }
 
@@ -38,9 +50,9 @@ h1 {
 
 textarea {
   width: 90%;
-  max-width: 700px;
-  height: 300px;
-  padding: 1rem;
+  max-width: 800px;
+  height: 400px;
+  padding: 1.5rem;
   background-color: rgba(255, 255, 255, 0.1);
   border: 1px solid #ccc;
   border-radius: 12px;
@@ -54,11 +66,69 @@ textarea::placeholder {
   color: #ddd;
 }
 
+.editable {
+  width: 90%;
+  max-width: 800px;
+  height: 400px;
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  color: white;
+  font-size: 1.1rem;
+  overflow-y: auto;
+  backdrop-filter: blur(5px);
+}
+
+.toolbar {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.toolbar button,
+.toolbar select,
+.toolbar input[type="color"] {
+  padding: 0.4rem 0.6rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid white;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  backdrop-filter: blur(4px);
+}
+
+.toolbar button:hover,
+.toolbar select:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+#download-notes {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid white;
+  color: white;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.3s;
+}
+
+#download-notes:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
 audio {
   margin-top: 2rem;
 }
 
-/* Selector de fondos */
+/* background selector */
 .bg-selector {
   position: absolute;
   top: 2rem;
