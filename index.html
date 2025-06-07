@@ -21,7 +21,7 @@
   </div>
 
   <!-- Notepad -->
-   <h1>🎧 Lo-fi Notepad </h1>
+  <h1>🎧 Lo-fi Notepad </h1>
   <div class="container">
     <div class="toolbar">
       <button onclick="formatText('bold')">🅑</button>
@@ -33,11 +33,10 @@
         <option value="24px">24px</option>
       </select>
       <input type="color" onchange="changeTextColor(this.value)">
+      <button onclick="downloadNotes()">💾 Descargar</button>
     </div>
-    <div id="notes" contenteditable="true" class="editable" spellcheck="false">
-      You are the owner of your inner world...
-    </div>
-    <button id="download-notes">💾 Download</button>
+    <div id="notes" contenteditable="true" class="editable" spellcheck="false"></div>
+    <div id="save-status" class="save-status">💾 Guardado</div>
 
     <!-- Music -->
     <audio controls autoplay loop>

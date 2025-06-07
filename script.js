@@ -1,11 +1,3 @@
-// autosave notepad setting
-const notes = document.getElementById('notes');
-notes.value = localStorage.getItem('ghibli_notes') || '';
-
-notes.addEventListener('input', () => {
-  localStorage.setItem('ghibli_notes', notes.value);
-});
-
 // font styling
 function formatText(command) {
   document.execCommand(command, false, null);
@@ -27,13 +19,15 @@ function changeTextColor(color) {
 }
 
 function downloadNotes() {
-  const content = document.getElementById("notes").innerHTML;
-  const blob = new Blob([content], { type: "text/html" });
+  const content = document.getElementById("notes").innerText; // <- solo texto
+  const blob = new Blob([content], { type: "text/plain" });
   const url = URL.createObjectURL(blob);
+
   const a = document.createElement("a");
   a.href = url;
-  a.download = "mis-notas.html";
+  a.download = "mis-notas.txt";
   a.click();
+
   URL.revokeObjectURL(url);
 }
 
@@ -53,16 +47,28 @@ if (savedBG) {
   document.body.style.backgroundImage = `url('${savedBG}')`;
 }
 
-// notepad download setting
-document.getElementById('download-notes').addEventListener('click', () => {
-  const text = document.getElementById('notes').value;
-  const blob = new Blob([text], { type: 'text/plain' });
-  const url = URL.createObjectURL(blob);
+// autosave notepad setting
+const notes = document.getElementById('notes');
+const saveStatus = document.getElementById("save-status");
 
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'my-notepad.txt';
-  a.click();
+notes.addEventListener('input', () => {
+  localStorage.setItem('misNotas', notes.innerHTML);
+  showSaveStatus();
+});
 
-  URL.revokeObjectURL(url); // cleaning
+function showSaveStatus() {
+  saveStatus.classList.add("visible");
+  clearTimeout(window._saveTimeout);
+  window._saveTimeout = setTimeout(() => {
+    saveStatus.classList.remove("visible");
+  }, 1200);
+}
+
+// keeping whatever is written
+window.addEventListener("DOMContentLoaded", () => {
+  const saved = localStorage.getItem("misNotas");
+  notes.innerHTML = "";
+  if (saved) {
+    notes.innerHTML = saved;
+  }
 });
