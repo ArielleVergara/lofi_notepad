@@ -17,6 +17,9 @@
       <img src="media/cozy_orange.png" class="bg-thumb" data-bg="media/cozy_orange.png" />
       <img src="media/cozy_purple.webp" class="bg-thumb" data-bg="media/cozy_purple.webp" />
       <img src="media/cozy_rain.jpg" class="bg-thumb" data-bg="media/cozy_rain.jpg" />
+      <!-- Upload img -->
+      <input type="file" id="upload-bg" accept="image/*" style="display: none;">
+      <label for="upload-bg" class="bg-upload">📁 Upload Img</label>
     </div>
   </div>
 
@@ -36,7 +39,7 @@
       <button onclick="downloadNotes()">💾 Descargar</button>
     </div>
     <div id="notes" contenteditable="true" class="editable" spellcheck="false"></div>
-    <div id="save-status" class="save-status">💾 Guardado</div>
+    <!-- <div id="save-status" class="save-status">💾 Guardado</div> -->
 
     <!-- Music -->
     <audio controls autoplay loop>

@@ -131,7 +131,19 @@ textarea::placeholder {
   background-color: rgba(255, 255, 255, 0.25);
 }
 
-.save-status {
+.bg-upload {
+  font-size: 1.1rem;
+  color: white;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  text-align: center;
+  transition: background 0.3s;
+  margin-top: 0.5rem;
+}
+
+/* .save-status {
   margin-top: 0.5rem;
   font-size: 0.9rem;
   color: #b0ffb0;
@@ -140,7 +152,7 @@ textarea::placeholder {
 }
 .save-status.visible {
   opacity: 1;
-}
+} */
 
 audio {
   margin-top: 2rem;

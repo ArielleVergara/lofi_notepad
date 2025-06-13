@@ -47,28 +47,61 @@ if (savedBG) {
   document.body.style.backgroundImage = `url('${savedBG}')`;
 }
 
-// autosave notepad setting
-const notes = document.getElementById('notes');
-const saveStatus = document.getElementById("save-status");
+const uploadInput = document.getElementById("upload-bg");
 
-notes.addEventListener('input', () => {
-  localStorage.setItem('misNotas', notes.innerHTML);
-  showSaveStatus();
+uploadInput.addEventListener("change", (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    const imageUrl = e.target.result;
+    document.body.style.backgroundImage = `url('${imageUrl}')`;
+    localStorage.setItem('ghibli_bg', imageUrl); // Guarda para mantenerlo al recargar
+    const newThumb = document.createElement("img");
+    newThumb.src = imageUrl;
+    newThumb.className = "bg-thumb";
+    newThumb.dataset.bg = imageUrl;
+
+    newThumb.addEventListener("click", () => {
+      document.body.style.backgroundImage = `url('${imageUrl}')`;
+      localStorage.setItem('ghibli_bg', imageUrl);
+    });
+
+    // 3. Insertar en el carrusel
+    const carousel = document.querySelector(".bg-carousel");
+    carousel.insertBefore(newThumb, carousel.firstChild);
+  };
+  reader.readAsDataURL(file);
 });
 
-function showSaveStatus() {
+
+
+// autosave notepad setting
+const notes = document.getElementById('notes');
+// const saveStatus = document.getElementById("save-status");
+
+
+/* notes.addEventListener('input', () => {
+  const safeHTML = sanitizeHTML(notes.innerHTML);
+  localStorage.setItem('misNotas', safeHTML);
+  showSaveStatus();
+}); */
+
+/* function showSaveStatus() {
   saveStatus.classList.add("visible");
   clearTimeout(window._saveTimeout);
   window._saveTimeout = setTimeout(() => {
     saveStatus.classList.remove("visible");
   }, 1200);
-}
+} */
 
-// keeping whatever is written
+/* // keeping whatever is written
 window.addEventListener("DOMContentLoaded", () => {
   const saved = localStorage.getItem("misNotas");
   notes.innerHTML = "";
   if (saved) {
-    notes.innerHTML = saved;
+    notes.innerHTML = sanitizeHTML(saved);
   }
-});
+}); */
+
